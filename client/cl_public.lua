@@ -37,7 +37,7 @@ local function TargetBoss(remove)
                     label = "Get Level",
                     action = function()
                         --XP usage example, get current level
-                        Core.Functions.TriggerCallback('pogu:server:GetLevel', function(level)
+                        Core.Functions.TriggerCallback('exp:server:GetLevel', function(level)
                             print("current level: "..level)
                         end)
                     end,
@@ -47,7 +47,7 @@ local function TargetBoss(remove)
                     label = "Add XP",
                     action = function()
                         --XP usage example, add xp
-                        TriggerServerEvent("pogu:server:AddRep", 5)
+                        TriggerServerEvent("exp:server:AddRep", 0.5)
                     end,
                 },
                 {
@@ -55,7 +55,7 @@ local function TargetBoss(remove)
                     label = "Remove XP",
                     action = function()
                         --XP usage example, remove xp
-                        TriggerServerEvent("pogu:server:RemoveRep", 5)
+                        TriggerServerEvent("exp:server:RemoveRep", 0.5)
                     end,
                 },
             },
@@ -67,7 +67,7 @@ end
 CreateThread(function()
     SpawnBoss()
     TargetBoss(false)
-    TriggerServerEvent("pogu:server:SetupRep")
+    TriggerServerEvent("exp:server:SetupRep")
 end)
 
 /***************************************************/

@@ -1,8 +1,8 @@
 fx_version 'cerulean'
 game 'gta5'
 
-author 'SKryptz'
-description 'XP | QBCore'
+author 'mknz'
+description 'XP'
 version '1.0.0'
 
 dependencies {
