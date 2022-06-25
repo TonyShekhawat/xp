@@ -37,8 +37,12 @@ local function TargetBoss(remove)
                     label = "Get Level",
                     action = function()
                         --XP usage example, get current level
-                        Core.Functions.TriggerCallback('exp:server:GetLevel', function(level)
-                            print("current level: "..level)
+                        Core.Functions.TriggerCallback('exp:server:GetLevelInfo', function(info)
+                            local currentLevel = info[1]
+                            local currentRep = info[2]
+                            local nextRep = info[3]
+                            local levelInfo =  string.format("Level: %s - EXP: %s/%s", currentLevel, currentRep, nextRep)
+                            print(levelInfo)
                         end)
                     end,
                 },
