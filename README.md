@@ -9,7 +9,7 @@ RegisterNetEvent("QBCore:OnPlayerLoaded", function()
     TriggerServerEvent("exp:server:LoadRep")
 end)
 ```
-OR
+   OR
 
 ```
 CreateThread(function()
