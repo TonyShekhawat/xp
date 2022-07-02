@@ -15,7 +15,6 @@ OR
 CreateThread(function()
     TriggerServerEvent("exp:server:LoadRep")
 end)
-
 ```
 3. Getting level info
 ```
@@ -25,12 +24,10 @@ Core.Functions.TriggerCallback('exp:server:GetLevelInfo', function(info)
     local nextRep = info[3] -- Get the XP amount for the next level
     local levelInfo =  string.format("Level: %s - EXP: %s/%s", currentLevel, currentRep, nextRep)
 end)
-
 ```
 4. Adding/removing XP
 ```
 local multi = 1.5 -- Change this if you want to increase/decrease the amount of XP given
 Add XP - TriggerServerEvent("exp:server:AddRep", multi) 
 Remove XP - TriggerServerEvent("exp:server:RemoveRep", multi)
-
 ```
