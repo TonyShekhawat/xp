@@ -10,7 +10,7 @@ local maxLevel = 10
 --local levelLabel = "Level: %s - EXP: %s/%s"
 --levelLabel = string.format("Level: %s - EXP: %s/%s", lvl, currentRep, nextRep)
 
-RegisterNetEvent('exp:server:SetupRep', function()
+RegisterNetEvent('exp:server:LoadRep', function()
     local src = source
     local player = Core.Functions.GetPlayer(src)
     if not player then return end
@@ -34,8 +34,9 @@ RegisterNetEvent('exp:server:AddRep', function(multiplier)
     if not player then return end
     local cid = player.PlayerData.citizenid
     local rngRep = math.random(400, 500)
-    local newRep = (rngRep - math.floor((rngRep / 100) * currentLevel * 10)) * multiplier
-    if currentRep + newRep > maxRep then return end
+    local newRep = math.floor((rngRep - (rngRep / 100) * currentLevel * 10) * multiplier)
+    if currentRep == maxRep then return end
+    if currentRep + newRep > maxRep then newRep = maxRep % currentRep end
     currentRep = currentRep + newRep
     MySQL.update('UPDATE boss_reputation SET rep = ? WHERE cid = ?', {currentRep, cid}, function(result) end)
 end)
@@ -46,20 +47,20 @@ RegisterNetEvent('exp:server:RemoveRep', function(multiplier)
     if not player then return end
     local cid = player.PlayerData.citizenid
     local rngRep = math.random(400, 500)
-    local newRep = (rngRep - math.floor((rngRep / 100) * currentLevel * 10)) * multiplier
-    if currentRep - newRep < 0 then return end
-    currentRep = currentRep - newRep
+    if currentRep - rngRep < 0 then return end
+    currentRep = currentRep - rngRep
     MySQL.update('UPDATE boss_reputation SET rep = ? WHERE cid = ?', {currentRep, cid}, function(result) end)
 end)
 
 function getLevelInfo()
-    for i = 1, maxLevel + 1 do
+    for i = 1, maxLevel do
         lvl = i - 1
         nextRep = math.floor((maxRep / 100) * i * 10)
+        if currentRep == maxRep then lvl = maxLevel break end
         if currentRep <= nextRep then break end
     end
     currentLevel = lvl
-    return { currentLevel, currentRep, nextRep }
+    return { currentLevel, currentRep, lvl == maxLevel and maxRep or nextRep }
 end
 
 Core.Functions.CreateCallback('exp:server:GetLevelInfo', function(_, cb)

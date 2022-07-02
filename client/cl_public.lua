@@ -37,6 +37,7 @@ local function TargetBoss(remove)
                     label = "Get Level",
                     action = function()
                         --XP usage example, get current level
+                        TriggerServerEvent("exp:server:LoadRep")
                         Core.Functions.TriggerCallback('exp:server:GetLevelInfo', function(info)
                             local currentLevel = info[1]
                             local currentRep = info[2]
@@ -51,7 +52,7 @@ local function TargetBoss(remove)
                     label = "Add XP",
                     action = function()
                         --XP usage example, add xp
-                        TriggerServerEvent("exp:server:AddRep", 0.5)
+                        TriggerServerEvent("exp:server:AddRep", 1.5)
                     end,
                 },
                 {
@@ -59,7 +60,7 @@ local function TargetBoss(remove)
                     label = "Remove XP",
                     action = function()
                         --XP usage example, remove xp
-                        TriggerServerEvent("exp:server:RemoveRep", 0.5)
+                        TriggerServerEvent("exp:server:RemoveRep", 1.5)
                     end,
                 },
             },
@@ -71,7 +72,7 @@ end
 CreateThread(function()
     SpawnBoss()
     TargetBoss(false)
-    TriggerServerEvent("exp:server:SetupRep")
+    TriggerServerEvent("exp:server:LoadRep")
 end)
 
 /***************************************************/
