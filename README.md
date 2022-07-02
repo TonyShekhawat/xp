@@ -1,4 +1,4 @@
-# A simple oxmysql XP system for QBCore
+# A simple XP system for QBCore
 
 ## Setup
 
@@ -31,3 +31,6 @@ local multi = 1.5 -- Change this if you want to increase/decrease the amount of 
 Add XP - TriggerServerEvent("exp:server:AddRep", multi) 
 Remove XP - TriggerServerEvent("exp:server:RemoveRep", multi)
 ```
+## Dependencies
+- QBCore
+- oxmysql
